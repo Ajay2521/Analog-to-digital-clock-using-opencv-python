@@ -66,6 +66,12 @@ mask = np.zeros((height,width), np.uint8)
 
 # detecting the edges of the image
 # cv2.Canny - used to detect a wide range of edges in images , Noise Reduction.
+# The Process of Canny edge detection algorithm can be broken down to 5 different steps:
+# 1. Apply Gaussian filter to smooth the image in order to remove the noise.
+# 2. Find the intensity gradients of the image.
+# 3. Apply non-maximum suppression to get rid of spurious response to edge detection
+# 4. Apply double threshold to determine potential edges.
+# 5. Track edge by hysteresis: Finalize the detection of edges by suppressing all the other edges that are weak and not connected to strong edges.
 edges = cv2.Canny(thresh, 100, 200)
 # print("\nedges :", edges)  -> [0 0 0 ... 0 0 0]
 # print("\nedges shape:", edges.shape) -> (480, 852)
@@ -154,6 +160,12 @@ ret, mask = cv2.threshold(i, 10, 255, cv2.THRESH_BINARY)
 
 # detecting the edges of the image
 # cv2.Canny - used to detect a wide range of edges in images , Noise Reduction
+# The Process of Canny edge detection algorithm can be broken down to 5 different steps:
+# 1. Apply Gaussian filter to smooth the image in order to remove the noise.
+# 2. Find the intensity gradients of the image.
+# 3. Apply non-maximum suppression to get rid of spurious response to edge detection
+# 4. Apply double threshold to determine potential edges.
+# 5. Track edge by hysteresis: Finalize the detection of edges by suppressing all the other edges that are weak and not connected to strong edges.
 edges = cv2.Canny(i,100,200)
 # print("\nedges :", edges)  # -> [0 0 0 ... 0 0 0]
 # print("\nedges shape:", edges.shape) # -> (401, 401)
@@ -409,10 +421,10 @@ else:
 # print('right =', right) # -> 1
 
 if(right==1):
-    hour = int(theta_hours / 30)
+    hour = int(theta_hours / (6*5))
 
 if(right==0):
-    hour = 12 - (int(theta_hours / 30))
+    hour = 12 - (int(theta_hours / (6*5)))
 
 if(hour==0):
     hour=12
@@ -454,15 +466,12 @@ else:
 # print('right =', right) # -> 1
 
 if(right==1):
-    minute = int(theta_min / 6)
+    minute = int(theta_min / ((6*5)/5))
 
 if(right==0):
-    minute = 60 - (int(theta_min / 6))
+    minute = 60 - (int(theta_min / ((6*5)/5)))
     if(xmin == xcenter):
         minutes=30
-
-if(minute==0):
-    minute=12
 
 # print('minute=' ,minute) # -> 2
 
